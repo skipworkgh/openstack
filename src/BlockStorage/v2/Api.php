@@ -359,4 +359,60 @@ class Api extends AbstractApi
             ],
         ];
     }
+
+    public function postBackups(): array
+    {
+        return [
+            'method'  => 'POST',
+            'path'    => 'backups',
+            'jsonKey' => 'backup',
+            'params'  => [
+                'volumeId'    => $this->params->volId(),
+                'force'       => $this->params->force(),
+                'name'        => $this->params->backupName(),
+                'description' => $this->params->desc(),
+            ],
+        ];
+    }
+
+    public function getBackups(): array
+    {
+        return [
+            'method' => 'GET',
+            'path'   => 'backups',
+            'params' => [
+                'marker'     => $this->params->marker(),
+                'limit'      => $this->params->limit(),
+                'sortDir'    => $this->params->sortDir(),
+                'sortKey'    => $this->params->sortKey(),
+                'allTenants' => $this->params->allTenants(),
+            ],
+        ];
+    }
+
+    public function getBackupsDetail(): array
+    {
+        $api = $this->getBackups();
+        $api['path'] .= '/detail';
+
+        return $api;
+    }
+
+    public function getBackup(): array
+    {
+        return [
+            'method' => 'GET',
+            'path'   => 'backups/{id}',
+            'params' => ['id' => $this->params->idPath()],
+        ];
+    }
+
+    public function deleteBackup(): array
+    {
+        return [
+            'method' => 'DELETE',
+            'path'   => 'backups/{id}',
+            'params' => ['id' => $this->params->idPath()],
+        ];
+    }
 }
