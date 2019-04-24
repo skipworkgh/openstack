@@ -421,11 +421,10 @@ class Api extends AbstractApi
         return [
             'method'  => 'POST',
             'path'    => 'backups/{id}/restore',
-            'jsonKey' => 'backup',
+            'jsonKey' => 'restore',
             'params'  => [
                 'id'       => $this->params->idPath(),
                 'volumeId' => $this->params->volId(),
-                'backupId' => $this->params->backupId(),
                 'name'     => $this->params->backupName(),
             ],
         ];
