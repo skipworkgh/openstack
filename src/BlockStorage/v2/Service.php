@@ -168,4 +168,12 @@ class Service extends AbstractService
     {
         return $this->model(Backup::class)->create($userOptions);
     }
+    /**
+     * @param array $userOptions {@see Api::restoreBackup}
+     * @return mixed
+     */
+    public function restoreBackup(array $userOptions)
+    {
+        return $this->model(Backup::class)->restore($userOptions);
+    }
 }

@@ -195,6 +195,25 @@ TYPEOTHER
         ];
     }
 
+    public function backupId(): array
+    {
+        return [
+            'type'        => self::STRING_TYPE,
+            'location'    => self::JSON,
+            'required'    => true,
+            'sentAs'      => 'backup_id',
+            'description' => 'To restore a backup to an existing volume, specify the ID of the existing backup.',
+        ];
+    }
+
+    public function backupName(): array
+    {
+        return parent::name('backup') + [
+                'type'     => self::STRING_TYPE,
+                'location' => self::JSON,
+            ];
+    }
+
     public function snapshotName(): array
     {
         return parent::name('snapshot') + [

@@ -415,4 +415,18 @@ class Api extends AbstractApi
             'params' => ['id' => $this->params->idPath()],
         ];
     }
+
+    public function restoreBackup(): array
+    {
+        return [
+            'method'  => 'POST',
+            'path'    => 'backups/{id}/restore',
+            'jsonKey' => 'restore',
+            'params'  => [
+                'id'       => $this->params->idPath(),
+                'volumeId' => $this->params->volId(),
+                'name'     => $this->params->backupName(),
+            ],
+        ];
+    }
 }

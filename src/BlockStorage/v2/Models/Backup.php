@@ -92,4 +92,9 @@ class Backup extends OperatorResource implements Listable, Creatable, Deletable,
     {
         $this->executeWithState($this->api->deleteBackup());
     }
+
+    public function restore(array $userOptions)
+    {
+        return $this->execute($this->api->restoreBackup(), $userOptions);
+    }
 }
