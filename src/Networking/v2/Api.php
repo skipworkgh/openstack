@@ -55,6 +55,8 @@ class Api extends AbstractApi
                 'adminStateUp'     => $this->params->adminStateUp(),
                 'routerAccessible' => $this->params->routerAccessibleJson(),
                 'tenantId'         => $this->params->tenantId(),
+                'providerNetworkType' => $this->params->providerNetworkType(),
+                'providerSegmentationId' => $this->params->providerSegmentationId(),
             ],
         ];
     }

@@ -72,6 +72,24 @@ class Params extends AbstractParams
         ];
     }
 
+    public function providerNetworkType(): array
+    {
+        return [
+            'type'        => self::STRING_TYPE,
+            'sentAs'      => 'provider:network_type',
+            'description' => 'The type of network to create. Valid values are: flat, vlan, vxlan or gre',
+        ];
+    }
+
+    public function providerSegmentationId(): array
+    {
+        return [
+            'type'        => self::STRING_TYPE,
+            'sentAs'      => 'provider:segmentation_id',
+            'description' => 'Segmentation id',
+        ];
+    }
+
     public function networkId(): array
     {
         return [
