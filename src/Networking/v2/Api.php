@@ -39,6 +39,8 @@ class Api extends AbstractApi
                 'tenantId'       => $this->params->queryTenantId(),
                 'status'         => $this->params->queryStatus(),
                 'routerExternal' => $this->params->queryRouterExternal(),
+                'providerNetworkType' => $this->params->queryProviderNetworkType(),
+                'providerSegmentationId' => $this->params->queryProviderSegmentationId(),
             ],
         ];
     }

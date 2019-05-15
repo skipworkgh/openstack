@@ -81,6 +81,11 @@ class Params extends AbstractParams
         ];
     }
 
+    public function queryProviderNetworkType(): array
+    {
+        return $this->queryFilter("provider:network_type");
+    }
+
     public function providerSegmentationId(): array
     {
         return [
@@ -88,6 +93,11 @@ class Params extends AbstractParams
             'sentAs'      => 'provider:segmentation_id',
             'description' => 'Segmentation id',
         ];
+    }
+
+    public function queryProviderSegmentationId(): array
+    {
+        return $this->queryFilter("provider:segmentation_id");
     }
 
     public function networkId(): array
