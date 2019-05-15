@@ -46,7 +46,6 @@ abstract class AbstractResource implements ResourceInterface, Serializable
     {
         if (0 === strpos($response->getHeaderLine('Content-Type'), 'application/json')) {
             $json = Utils::jsonDecode($response);
-            d($json);
             if (!empty($json)) {
                 $this->populateFromArray(Utils::flattenJson($json, $this->resourceKey));
             }
