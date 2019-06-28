@@ -171,6 +171,16 @@ class Volume extends OperatorResource implements Creatable, Listable, Updateable
     }
 
     /**
+     * Update the readonly status for a volume, mark it as a readonly volume.
+     *
+     * @param bool $readonly
+     */
+    public function setReadonly(bool $readonly = false)
+    {
+        $this->execute($this->api->postVolumeReadonly(), ['id' => $this->id, 'readonly' => $readonly]);
+    }
+
+    /**
      * Sets the image metadata for a volume.
      *
      * @param array $metadata

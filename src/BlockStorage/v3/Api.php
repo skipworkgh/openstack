@@ -319,6 +319,19 @@ class Api extends AbstractApi
         ];
     }
 
+    public function postVolumeReadonly(): array
+    {
+        return [
+            'method'  => 'POST',
+            'path'    => 'volumes/{id}/action',
+            'jsonKey' => 'os-update_readonly_flag',
+            'params'  => [
+                'id'       => $this->params->idPath(),
+                'readonly' => $this->params->readonly(),
+            ],
+        ];
+    }
+
     public function postImageMetadata(): array
     {
         return [

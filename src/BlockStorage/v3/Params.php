@@ -89,6 +89,15 @@ class Params extends AbstractParams
         ];
     }
 
+    public function readonly(): array
+    {
+        return [
+            'type'        => self::BOOL_TYPE,
+            'location'    => self::JSON,
+            'description' => 'Enables or disables the readonly attribute.',
+        ];
+    }
+
     public function volumeStatus(): array
     {
         return [
