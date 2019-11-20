@@ -606,4 +606,23 @@ class Server extends OperatorResource implements Creatable, Updateable, Deletabl
     {
         $this->execute($this->api->deleteVolumeAttachments(), ['id' => $this->id, 'attachmentId' => $attachmentId]);
     }
+
+    /**
+     * @return array
+     */
+    public function getDiagnostics()
+    {
+        $response = $this->execute($this->api->getServerDiagnostics(), ['id' => $this->id]);
+
+        return $this->parseDiagnostics($response);
+    }
+
+    /**
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @return array
+     */
+    public function parseDiagnostics(ResponseInterface $response): array
+    {
+        return Utils::jsonDecode($response);
+    }
 }
