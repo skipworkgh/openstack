@@ -4,13 +4,8 @@ declare(strict_types=1);
 
 namespace OpenStack\Shared\v2;
 
-use OpenStack\BlockStorage\v3\Models\Backup;
-use OpenStack\BlockStorage\v3\Models\QuotaSet;
-use OpenStack\BlockStorage\v3\Models\Snapshot;
-use OpenStack\BlockStorage\v3\Models\Volume;
-use OpenStack\BlockStorage\v3\Models\VolumeType;
-use OpenStack\Common\Service\AbstractService;
 use OpenStack\Shared\v2\Models\Share;
+use OpenStack\Common\Service\AbstractService;
 
 /**
  * @property \OpenStack\Shared\v2\Api $api
@@ -37,5 +32,13 @@ class Service extends AbstractService
         $share = $this->model(Share::class);
         $share->populateFromArray(["id" => $shareId]);
         return $share;
+    }
+    /**
+     * @param array $userOptions
+     * @return \OpenStack\Shared\v2\Models\Share
+     */
+    public function createShare(array $userOptions): Share
+    {
+        return $this->model(Share::class)->create($userOptions);
     }
 }
