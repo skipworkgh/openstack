@@ -229,4 +229,17 @@ class OpenStack
 
         return $this->builder->createService('Metric\\v1\\Gnocchi', array_merge($defaults, $options));
     }
+    /**
+     * Creates a new Shared service v2.
+     *
+     * @param array $options
+     * @return \Openstack\Shared\v2\Service
+     * @throws \Exception
+     */
+    public function sharedV2(array $options = []): \Openstack\Shared\v2\Service
+    {
+        $defaults = ['catalogName' => 'manila', 'catalogType' => 'sharev2'];
+
+        return $this->builder->createService('Shared\\v2', array_merge($defaults, $options));
+    }
 }
