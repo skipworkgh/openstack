@@ -61,6 +61,7 @@ class Api extends AbstractApi
                 'sort'       => $this->params->sort(),
                 'allTenants' => $this->params->allTenants(),
             ],
+            'headers' => ['a' => 'blaat'],
         ];
     }
     /**
@@ -149,6 +150,23 @@ class Api extends AbstractApi
             'params' => [
                 'id'       => $this->params->idPath(),
                 'metadata' => $this->params->metadata(),
+            ],
+        ];
+    }
+    /**
+     * @return array
+     */
+    public function postShareGrantaccess(): array
+    {
+        return [
+            'method'  => 'POST',
+            'path'    => 'shares/{id}/action',
+            'jsonKey' => 'os-allow_access',
+            'params'  => [
+                'id'          => $this->params->idPath(),
+                'accessLevel' => $this->params->accessLevel(),
+                'accessType'  => $this->params->accessType(),
+                'accessTo'    => $this->params->accessTo(),
             ],
         ];
     }

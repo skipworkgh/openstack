@@ -172,4 +172,40 @@ TYPEOTHER
             'description' => 'Enables or disables the public attribute. You can make a share publicly available.',
         ];
     }
+    /**
+     * @return array
+     */
+    public function accessLevel(): array
+    {
+        return [
+            'type' => self::STRING_TYPE,
+            'location' => self::JSON,
+            'sentAs' => 'access_level',
+            'description' => 'The access level to the share. To grant or deny access to a share, you specify one of the following share access levels: - rw. Read and write (RW) access. - ro. Read- only (RO) access.',
+        ];
+    }
+    /**
+     * @return array
+     */
+    public function accessType(): array
+    {
+        return [
+            'type' => self::STRING_TYPE,
+            'location' => self::JSON,
+            'sentAs' => 'access_type',
+            'description' => 'The access rule type. A valid value for the share access rule type is one of the following values: - ip. Authenticates an instance through its IP address. A valid format is XX.XX.XX.XX or XX.XX.XX.XX/XX. For example 0.0.0.0/0. - cert. Authenticates an instance through a TLS certificate. Specify the TLS identity as the IDENTKEY. A valid value is any string up to 64 characters long in the common name (CN) of the certificate. The meaning of a string depends on its interpretation. - user. Authenticates by a user or group name. A valid value is an alphanumeric string that can contain some special characters and is from 4 to 32 characters long.',
+        ];
+    }
+    /**
+     * @return array
+     */
+    public function accessTo(): array
+    {
+        return [
+            'type' => self::STRING_TYPE,
+            'location' => self::JSON,
+            'sentAs' => 'access_to',
+            'description' => 'The value that defines the access. The back end grants or denies the access to it. A valid value is one of these values: - ip. Authenticates an instance through its IP address. A valid format is XX.XX.XX.XX or XX.XX.XX.XX/XX. For example 0.0.0.0/0. - cert. Authenticates an instance through a TLS certificate. Specify the TLS identity as the IDENTKEY. A valid value is any string up to 64 characters long in the common name (CN) of the certificate. The meaning of a string depends on its interpretation. - user. Authenticates by a user or group name. A valid value is an alphanumeric string that can contain some special characters and is from 4 to 32 characters long.',
+        ];
+    }
 }

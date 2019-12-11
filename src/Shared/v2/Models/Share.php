@@ -192,4 +192,12 @@ class Share extends OperatorResource implements Creatable, Listable, Updateable,
 
         return isset($json['metadata']) ? $json['metadata'] : [];
     }
+
+    public function grantAccess(array $userOptions)
+    {
+        $userOptions = array_merge($userOptions, ['id' => $this->id]);
+        $response = $this->execute($this->api->postShareGrantaccess(), $userOptions);
+
+        //todo: handle response
+    }
 }
