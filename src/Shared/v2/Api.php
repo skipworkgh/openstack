@@ -61,7 +61,6 @@ class Api extends AbstractApi
                 'sort'       => $this->params->sort(),
                 'allTenants' => $this->params->allTenants(),
             ],
-            'headers' => ['a' => 'blaat'],
         ];
     }
     /**
