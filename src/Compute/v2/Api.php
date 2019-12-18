@@ -906,4 +906,32 @@ class Api extends AbstractApi
             ],
         ];
     }
+
+    public function postServerGroup(): array
+    {
+
+    }
+
+    public function deleteServerGroup(): array
+    {
+
+    }
+
+    public function getServerGroup(): array
+    {
+
+    }
+
+    public function getServerGroups(): array
+    {
+        return [
+            'method' => 'GET',
+            'path'   => 'os-server-groups',
+            'params' => [
+                'limit'        => $this->params->limit(),
+                'marker'       => $this->params->marker(),
+                'allProjects' => $this->params->allProjects(),
+            ],
+        ];
+    }
 }

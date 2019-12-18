@@ -15,6 +15,7 @@ use OpenStack\Compute\v2\Models\Host;
 use OpenStack\Compute\v2\Models\Hypervisor;
 use OpenStack\Compute\v2\Models\AvailabilityZone;
 use OpenStack\Compute\v2\Models\QuotaSet;
+use OpenStack\Compute\v2\Models\ServerGroup;
 
 /**
  * Compute v2 service for OpenStack.
@@ -307,5 +308,18 @@ class Service extends AbstractService
         $quotaSet->populateFromResponse($this->execute($detailed ? $this->api->getQuotaSetDetail() : $this->api->getQuotaSet(), ['tenantId' => $tenantId]));
 
         return $quotaSet;
+    }
+
+    /**
+     * List servers.
+     *
+     * @param array    $options  {@see \OpenStack\Compute\v2\Api::getServerGroups}
+     * @param callable $mapFn    a callable function that will be invoked on every iteration of the list
+     *
+     * @return \Generator
+     */
+    public function listServerGroups(array $options = [], callable $mapFn = null): \Generator
+    {
+        return $this->model(ServerGroup::class)->enumerate($this->api->getServerGroups(), $options, $mapFn);
     }
 }

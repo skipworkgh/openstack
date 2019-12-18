@@ -108,4 +108,14 @@ DESC
             'description' => '(Admin only) Set this to true to pull volume information from all tenants.',
         ];
     }
+
+    public function allProjects(): array
+    {
+        return [
+            'type'        => self::BOOL_TYPE,
+            'location'    => self::QUERY,
+            'sentAs'      => 'all_projects',
+            'description' => '(Admin only) Lists server groups for all projects.',
+        ];
+    }
 }
