@@ -28,10 +28,32 @@ class RequestSerializer
             $this->callStockingMethod($schema, $paramValue, $options);
         }
 
-        if (!empty($options['json'])) {
-            if ($key = $operation->getJsonKey()) {
-                $options['json'] = [$key => $options['json']];
+        if (isset($options['json']) && $key = $operation->getJsonKey()) {
+            $options['json'] = [$key => $options['json']];
+        }
+
+        if (count($operation->getJsonKeys()) > 0){
+            foreach ($operation->getJsonKeys() as $section) {
+                $sectionoption = [];
+
+                foreach ($userValues as $paramName => $paramValue) {
+                    if (!isset($section["params"][$paramName])) {
+                        continue;
+                    }
+                    $schema = new Parameter($section["params"][$paramName]);
+
+                    $this->callStockingMethod($schema, $paramValue, $sectionoption);
+                }
+
+                if (isset($section['key']) && isset($sectionoption['json'])) {
+                    $sectionoption['json'] = [$section["key"] => $sectionoption['json']];
+                }
+
+                $options['json'] = array_merge($options['json'] ?? [], $sectionoption['json']);
             }
+        }
+
+        if (!empty($options['json'])) {
             if (false !== strpos(json_encode($options['json']), '\/')) {
                 $options['body']                    = json_encode($options['json'], JSON_UNESCAPED_SLASHES);
                 $options['headers']['Content-Type'] = 'application/json';

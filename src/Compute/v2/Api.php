@@ -205,6 +205,14 @@ class Api extends AbstractApi
                 'blockDeviceMapping' => $this->params->blockDeviceMapping(),
                 'keyName'            => $this->params->keyName(),
             ],
+            'jsonKeys' => [
+                [
+                    'key' => 'OS-SCH-HNT:scheduler_hints',
+                    'params' => [
+                        'group' => $this->params->serverGroupId(),
+                    ],
+                ],
+            ]
         ];
     }
 

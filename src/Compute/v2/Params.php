@@ -155,6 +155,16 @@ class Params extends AbstractParams
         ];
     }
 
+    public function serverGroupId(): array
+    {
+        return [
+            'type'        => self::STRING_TYPE,
+            'required'    => true,
+            'sentAs'      => 'group',
+            'description' => 'The server group id to attach this server to',
+        ];
+    }
+
     public function networkId(): array
     {
         return [

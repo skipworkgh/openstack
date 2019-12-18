@@ -24,6 +24,9 @@ class Operation
     /** @var string The top-level JSON key */
     private $jsonKey;
 
+    /** @var array Other top-level keys */
+    private $jsonKeys = [];
+
     /** @var []Parameter The parameters of this operation */
     private $params;
 
@@ -39,6 +42,10 @@ class Operation
 
         if (isset($definition['jsonKey'])) {
             $this->jsonKey = $definition['jsonKey'];
+        }
+
+        if (isset($definition['jsonKeys'])) {
+            $this->jsonKeys = $definition['jsonKeys'];
         }
 
         $this->params = self::toParamArray($definition['params']);
@@ -88,6 +95,14 @@ class Operation
     public function getJsonKey(): string
     {
         return $this->jsonKey ?: '';
+    }
+
+    /**
+     * @return array
+     */
+    public function getJsonKeys(): array
+    {
+        return $this->jsonKeys;
     }
 
     /**
