@@ -667,4 +667,35 @@ EOL
     {
         return $this->quotaSetLimit('server_group_members', 'The number of allowed members for each server group.');
     }
+
+    public function policies(): array
+    {
+        return [
+            'type'  => self::ARRAY_TYPE,
+            'sendAs' => 'policies',
+            'items' => [
+                'type' => self::STRING_TYPE,
+            ],
+            'description' => <<<EOL
+A list of exactly one policy name to associate with the server group. The current valid policy names are:
+- anti-affinity - servers in this group must be scheduled to different hosts.
+- affinity - servers in this group must be scheduled to the same host.
+- soft-anti-affinity - servers in this group should be scheduled to different hosts if possible, but if not possible then they should still be scheduled instead of resulting in a build failure. This policy was added in microversion 2.15.
+- soft-affinity - servers in this group should be scheduled to the same host if possible, but if not possible then they should still be scheduled instead of resulting in a build failure. This policy was added in microversion 2.15.
+Available until version 2.63
+EOL
+        ];
+    }
+
+    public function policy(): array
+    {
+        return [
+            'type'  => self::STRING_TYPE,
+            'sendAs' => 'policy',
+            'description' => <<<EOL
+The rules field, which is a dict, can be applied to the policy. Currently, only the max_server_per_host rule is supported for the anti-affinity policy. The max_server_per_host rule allows specifying how many members of the anti-affinity group can reside on the same compute host. If not specified, only one member from the same anti-affinity group can reside on a given host. Requesting policy rules with any other policy than anti-affinity will be 400.
+New in version 2.64
+EOL
+        ];
+    }
 }

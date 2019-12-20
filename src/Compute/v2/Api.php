@@ -909,17 +909,37 @@ class Api extends AbstractApi
 
     public function postServerGroup(): array
     {
-
+        return [
+            'path'    => 'os-server-groups',
+            'method'  => 'POST',
+            'jsonKey' => 'server_group',
+            'params'  => [
+                'metadata'           => $this->notRequired($this->params->metadata()),
+                'name'               => $this->isRequired($this->params->name('server_group')),
+                'policies'           => $this->params->policies(),
+                'policy'             => $this->params->policy(),
+            ],
+        ];
     }
 
     public function deleteServerGroup(): array
     {
-
+        return [
+            'method' => 'DELETE',
+            'path'   => 'os-server-groups/{id}',
+            'params' => ['id' => $this->params->urlId('server')],
+        ];
     }
 
     public function getServerGroup(): array
     {
-
+        return [
+            'method' => 'GET',
+            'path'   => 'os-server-groups/{id}',
+            'params' => [
+                'id' => $this->params->urlId('server_group'),
+            ],
+        ];
     }
 
     public function getServerGroups(): array
@@ -929,8 +949,7 @@ class Api extends AbstractApi
             'path'   => 'os-server-groups',
             'params' => [
                 'limit'        => $this->params->limit(),
-                'marker'       => $this->params->marker(),
-                'allProjects' => $this->params->allProjects(),
+                'allProjects'  => $this->params->allProjects(),
             ],
         ];
     }

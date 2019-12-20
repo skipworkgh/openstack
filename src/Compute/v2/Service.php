@@ -322,4 +322,35 @@ class Service extends AbstractService
     {
         return $this->model(ServerGroup::class)->enumerate($this->api->getServerGroups(), $options, $mapFn);
     }
+
+    /**
+     * Retrieve a server group object without calling the remote API. Any values provided in the array will populate the
+     * empty object, allowing you greater control without the expense of network transactions. To call the remote API
+     * and have the response populate the object, call {@see ServerGroup::retrieve}. For example:.
+     *
+     * <code>$server_group = $service->getServerGroup(['id' => '{serverGroupId}']);</code>
+     *
+     * @param array $options An array of attributes that will be set on the {@see ServerGroup} object. The array keys need to
+     *                       correspond to the class public properties.
+     *
+     * @return \OpenStack\Compute\v2\Models\ServerGroup
+     */
+    public function getServerGroup(array $options = []): ServerGroup
+    {
+        $server_group = $this->model(ServerGroup::class);
+        $server_group->populateFromArray($options);
+
+        return $server_group;
+    }
+    /**
+     * Create a new server group resource. This operation will provision a new server group.
+     *
+     * @param array $options {@see \OpenStack\Compute\v2\Api::postServerGroup}
+     *
+     * @return \OpenStack\Compute\v2\Models\ServerGroup
+     */
+    public function createServerGroup(array $options): ServerGroup
+    {
+        return $this->model(ServerGroup::class)->create($options);
+    }
 }

@@ -32,12 +32,14 @@ class ServerGroup extends OperatorResource implements Creatable, Deletable, Retr
     /** @var string */
     public $name;
 
-    /** @var array */
+    /** @var array Until version 2.63 */
     public $policies;
+
+    /** @var string Version 2.64 onwards */
+    public $policy;
 
     protected $resourceKey  = 'server_group';
     protected $resourcesKey = 'server_groups';
-    protected $markerKey    = 'id';
 
     protected $aliases = [];
 
@@ -48,8 +50,8 @@ class ServerGroup extends OperatorResource implements Creatable, Deletable, Retr
      */
     public function create(array $userOptions): Creatable
     {
-        if (!isset($userOptions['imageId']) && !isset($userOptions['blockDeviceMapping'][0]['uuid'])) {
-            throw new \RuntimeException('imageId or blockDeviceMapping.uuid must be set.');
+        if (!isset($userOptions["policy"]) && !isset($userOptions["policies"])) {
+            throw new \RuntimeException('A policy must be set');
         }
 
         $response = $this->execute($this->api->postServerGroup(), $userOptions);
