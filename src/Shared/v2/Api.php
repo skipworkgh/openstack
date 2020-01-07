@@ -160,7 +160,7 @@ class Api extends AbstractApi
         return [
             'method'  => 'POST',
             'path'    => 'shares/{id}/action',
-            'jsonKey' => 'os-allow_access',
+            'jsonKey' => 'allow_access',
             'params'  => [
                 'id'          => $this->params->idPath(),
                 'accessLevel' => $this->params->accessLevel(),
