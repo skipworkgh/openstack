@@ -49,7 +49,7 @@ class RequestSerializer
                     $sectionoption['json'] = [$section["key"] => $sectionoption['json']];
                 }
 
-                $options['json'] = array_merge($options['json'] ?? [], $sectionoption['json']);
+                $options['json'] = array_merge($options['json'] ?? [], $sectionoption['json'] ?? []);
             }
         }
 
