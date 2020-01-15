@@ -51,17 +51,11 @@ class Operation
         $this->params = self::toParamArray($definition['params']);
     }
 
-    /**
-     * @return string
-     */
     public function getPath(): string
     {
         return $this->path;
     }
 
-    /**
-     * @return string
-     */
     public function getMethod(): string
     {
         return $this->method;
@@ -71,8 +65,6 @@ class Operation
      * Indicates whether this operation supports a parameter.
      *
      * @param $key The name of a parameter
-     *
-     * @return bool
      */
     public function hasParam(string $key): bool
     {
@@ -89,9 +81,6 @@ class Operation
         return isset($this->params[$name]) ? $this->params[$name] : null;
     }
 
-    /**
-     * @return string
-     */
     public function getJsonKey(): string
     {
         return $this->jsonKey ?: '';
@@ -110,8 +99,6 @@ class Operation
      * {@see Parameter} objects.
      *
      * @param array $data A generic data array
-     *
-     * @return array
      */
     public static function toParamArray(array $data): array
     {

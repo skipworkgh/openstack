@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace OpenStack\Compute\v2;
 
 use OpenStack\Common\Service\AbstractService;
+use OpenStack\Compute\v2\Models\AvailabilityZone;
 use OpenStack\Compute\v2\Models\Flavor;
+use OpenStack\Compute\v2\Models\Host;
+use OpenStack\Compute\v2\Models\Hypervisor;
 use OpenStack\Compute\v2\Models\HypervisorStatistic;
 use OpenStack\Compute\v2\Models\Image;
 use OpenStack\Compute\v2\Models\Keypair;
 use OpenStack\Compute\v2\Models\Limit;
-use OpenStack\Compute\v2\Models\Server;
-use OpenStack\Compute\v2\Models\Host;
-use OpenStack\Compute\v2\Models\Hypervisor;
-use OpenStack\Compute\v2\Models\AvailabilityZone;
 use OpenStack\Compute\v2\Models\QuotaSet;
 use OpenStack\Compute\v2\Models\ServerGroup;
+use OpenStack\Compute\v2\Models\Server;
 
 /**
  * Compute v2 service for OpenStack.
@@ -29,8 +29,6 @@ class Service extends AbstractService
      * service API.
      *
      * @param array $options {@see \OpenStack\Compute\v2\Api::postServer}
-     *
-     * @return \OpenStack\Compute\v2\Models\Server
      */
     public function createServer(array $options): Server
     {
@@ -44,8 +42,6 @@ class Service extends AbstractService
      *                           the ID, name and links attributes are returned, saving bandwidth.
      * @param array    $options  {@see \OpenStack\Compute\v2\Api::getServers}
      * @param callable $mapFn    a callable function that will be invoked on every iteration of the list
-     *
-     * @return \Generator
      */
     public function listServers(bool $detailed = false, array $options = [], callable $mapFn = null): \Generator
     {
@@ -63,8 +59,6 @@ class Service extends AbstractService
      *
      * @param array $options An array of attributes that will be set on the {@see Server} object. The array keys need to
      *                       correspond to the class public properties.
-     *
-     * @return \OpenStack\Compute\v2\Models\Server
      */
     public function getServer(array $options = []): Server
     {
@@ -80,8 +74,6 @@ class Service extends AbstractService
      * @param array    $options  {@see \OpenStack\Compute\v2\Api::getFlavors}
      * @param callable $mapFn    a callable function that will be invoked on every iteration of the list
      * @param bool     $detailed set to true to fetch flavors' details
-     *
-     * @return \Generator
      */
     public function listFlavors(array $options = [], callable $mapFn = null, bool $detailed = false): \Generator
     {
@@ -97,8 +89,6 @@ class Service extends AbstractService
      *
      * @param array $options An array of attributes that will be set on the {@see Flavor} object. The array keys need to
      *                       correspond to the class public properties.
-     *
-     * @return \OpenStack\Compute\v2\Models\Flavor
      */
     public function getFlavor(array $options = []): Flavor
     {
@@ -112,8 +102,6 @@ class Service extends AbstractService
      * Create a new flavor resource.
      *
      * @param array $options {@see \OpenStack\Compute\v2\Api::postFlavors}
-     *
-     * @return Flavor
      */
     public function createFlavor(array $options = []): Flavor
     {
@@ -125,8 +113,6 @@ class Service extends AbstractService
      *
      * @param array    $options {@see \OpenStack\Compute\v2\Api::getImages}
      * @param callable $mapFn   a callable function that will be invoked on every iteration of the list
-     *
-     * @return \Generator
      */
     public function listImages(array $options = [], callable $mapFn = null): \Generator
     {
@@ -140,8 +126,6 @@ class Service extends AbstractService
      *
      * @param array $options An array of attributes that will be set on the {@see Image} object. The array keys need to
      *                       correspond to the class public properties.
-     *
-     * @return \OpenStack\Compute\v2\Models\Image
      */
     public function getImage(array $options = []): Image
     {
@@ -156,8 +140,6 @@ class Service extends AbstractService
      *
      * @param array    $options {@see \OpenStack\Compute\v2\Api::getKeyPairs}
      * @param callable $mapFn   a callable function that will be invoked on every iteration of the list
-     *
-     * @return \Generator
      */
     public function listKeypairs(array $options = [], callable $mapFn = null): \Generator
     {
@@ -166,10 +148,6 @@ class Service extends AbstractService
 
     /**
      * Create or import keypair.
-     *
-     * @param array $options
-     *
-     * @return Keypair
      */
     public function createKeypair(array $options): Keypair
     {
@@ -178,10 +156,6 @@ class Service extends AbstractService
 
     /**
      * Get keypair.
-     *
-     * @param array $options
-     *
-     * @return Keypair
      */
     public function getKeypair(array $options = []): Keypair
     {
@@ -193,8 +167,6 @@ class Service extends AbstractService
 
     /**
      * Shows rate and absolute limits for the tenant.
-     *
-     * @return Limit
      */
     public function getLimits(): Limit
     {
@@ -206,8 +178,6 @@ class Service extends AbstractService
 
     /**
      * Shows summary statistics for all hypervisors over all compute nodes.
-     *
-     * @return HypervisorStatistic
      */
     public function getHypervisorStatistics(): HypervisorStatistic
     {
@@ -224,8 +194,6 @@ class Service extends AbstractService
      *                           the ID, name and links attributes are returned, saving bandwidth.
      * @param array    $options  {@see \OpenStack\Compute\v2\Api::getHypervisors}
      * @param callable $mapFn    a callable function that will be invoked on every iteration of the list
-     *
-     * @return \Generator
      */
     public function listHypervisors(bool $detailed = false, array $options = [], callable $mapFn = null): \Generator
     {
@@ -236,10 +204,6 @@ class Service extends AbstractService
 
     /**
      * Shows details for a given hypervisor.
-     *
-     * @param array $options
-     *
-     * @return Hypervisor
      */
     public function getHypervisor(array $options = []): Hypervisor
     {
@@ -253,8 +217,6 @@ class Service extends AbstractService
      *
      * @param array    $options {@see \OpenStack\Compute\v2\Api::getHosts}
      * @param callable $mapFn   a callable function that will be invoked on every iteration of the list
-     *
-     * @return \Generator
      */
     public function listHosts(array $options = [], callable $mapFn = null): \Generator
     {
@@ -270,8 +232,6 @@ class Service extends AbstractService
      *
      * @param array $options An array of attributes that will be set on the {@see Host} object. The array keys need to
      *                       correspond to the class public properties.
-     *
-     * @return \OpenStack\Compute\v2\Models\Host
      */
     public function getHost(array $options = []): Host
     {
@@ -286,8 +246,6 @@ class Service extends AbstractService
      *
      * @param array    $options {@see \OpenStack\Compute\v2\Api::getAvailabilityZones}
      * @param callable $mapFn   a callable function that will be invoked on every iteration of the list
-     *
-     * @return \Generator
      */
     public function listAvailabilityZones(array $options = [], callable $mapFn = null): \Generator
     {
@@ -296,11 +254,6 @@ class Service extends AbstractService
 
     /**
      * Shows A Quota for a tenant.
-     *
-     * @param string $tenantId
-     * @param bool   $detailed
-     *
-     * @return QuotaSet
      */
     public function getQuotaSet(string $tenantId, bool $detailed = false): QuotaSet
     {
