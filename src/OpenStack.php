@@ -211,7 +211,7 @@ class OpenStack
      */
     public function sharedV2(array $options = []): \Openstack\Shared\v2\Service
     {
-        $defaults = ['catalogName' => 'manila', 'catalogType' => 'sharev2'];
+        $defaults = ['catalogName' => 'manilav2', 'catalogType' => 'sharev2'];
 
         return $this->builder->createService('Shared\\v2', array_merge($defaults, $options));
     }
