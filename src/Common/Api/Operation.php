@@ -15,6 +15,9 @@ namespace OpenStack\Common\Api;
  */
 class Operation
 {
+    /** @var array $headers */
+    private $headers;
+
     /** @var string The HTTP method */
     private $method;
 
@@ -37,8 +40,9 @@ class Operation
      */
     public function __construct(array $definition)
     {
-        $this->method = $definition['method'];
-        $this->path   = $definition['path'];
+        $this->headers = $definition['headers'] ?? [];
+        $this->method  = $definition['method'];
+        $this->path    = $definition['path'];
 
         if (isset($definition['jsonKey'])) {
             $this->jsonKey = $definition['jsonKey'];
@@ -70,7 +74,13 @@ class Operation
     {
         return isset($this->params[$key]);
     }
-
+    /**
+     * @return array
+     */
+    public function getHeaders(): array
+    {
+        return $this->headers;
+    }
     /**
      * @param $name
      *

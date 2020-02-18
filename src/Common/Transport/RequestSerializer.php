@@ -18,7 +18,7 @@ class RequestSerializer
 
     public function serializeOptions(Operation $operation, array $userValues = []): array
     {
-        $options = ['headers' => []];
+        $options = ['headers' => $operation->getHeaders()];
 
         foreach ($userValues as $paramName => $paramValue) {
             if (null === ($schema = $operation->getParam($paramName))) {

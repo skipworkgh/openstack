@@ -167,6 +167,10 @@ class Api extends AbstractApi
                 'accessType'  => $this->params->accessType(),
                 'accessTo'    => $this->params->accessTo(),
             ],
+            'headers' => [
+                'Vary' => 'X-OpenStack-Manila-API-Version',
+                'X-Openstack-Manila-Api-Version' => '2.42',
+            ],
         ];
     }
 }
