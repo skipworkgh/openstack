@@ -192,12 +192,22 @@ class Share extends OperatorResource implements Creatable, Listable, Updateable,
 
         return isset($json['metadata']) ? $json['metadata'] : [];
     }
-
-    public function grantAccess(array $userOptions)
+    /**
+     * @param array $userOptions
+     * @return \OpenStack\Common\Resource\ResourceInterface
+     */
+    public function grantAccess(array $userOptions): AccessRule
     {
         $userOptions = array_merge($userOptions, ['id' => $this->id]);
         $response = $this->execute($this->api->postShareGrantaccess(), $userOptions);
 
-        //todo: handle response
+        return $this->model(AccessRule::class)->populateFromResponse($response);
+    }
+    /**
+     * @return mixed
+     */
+    public function getAccessRules()
+    {
+        return $this->model(AccessRule::class)->enumerate($this->api->getShareAccessRules(), ['id' => $this->id]);
     }
 }

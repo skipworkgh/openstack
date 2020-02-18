@@ -6,6 +6,7 @@ namespace OpenStack\Shared\v2;
 
 use OpenStack\Shared\v2\Models\Share;
 use OpenStack\Common\Service\AbstractService;
+use OpenStack\Shared\v2\Models\AccessRule;
 
 /**
  * @property \OpenStack\Shared\v2\Api $api
@@ -40,5 +41,13 @@ class Service extends AbstractService
     public function createShare(array $userOptions): Share
     {
         return $this->model(Share::class)->create($userOptions);
+    }
+    /**
+     * @param string $shareAccessId
+     * @return mixed
+     */
+    public function getShareAccessRule(string $shareAccessId)
+    {
+        return $this->model(AccessRule::class)->populateFromArray(['id' => $shareAccessId]);
     }
 }

@@ -173,4 +173,38 @@ class Api extends AbstractApi
             ],
         ];
     }
+    /**
+     * @return array
+     */
+    public function getShareAccessRule(): array
+    {
+        return [
+            'method' => 'GET',
+            'path' => 'share-access-rules/{id}',
+            'params' => [
+                'id' => $this->params->idPath(),
+            ],
+            'headers' => [
+                'Vary' => 'X-OpenStack-Manila-API-Version',
+                'X-Openstack-Manila-Api-Version' => '2.49',
+            ],
+        ];
+    }
+    /**
+     * @return array
+     */
+    public function getShareAccessRules(): array
+    {
+        return [
+            'method' => 'GET',
+            'path' => 'share-access-rules?share_id={id}',
+            'params' => [
+                'id' => $this->params->idPath(),
+            ],
+            'headers' => [
+                'Vary' => 'X-OpenStack-Manila-API-Version',
+                'X-Openstack-Manila-Api-Version' => '2.49',
+            ],
+        ];
+    }
 }
