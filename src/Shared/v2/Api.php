@@ -207,4 +207,23 @@ class Api extends AbstractApi
             ],
         ];
     }
+    /**
+     * @return array
+     */
+    public function deleteShareAccessRule(): array
+    {
+        return [
+            'method'  => 'POST',
+            'path'    => 'shares/{id}/action',
+            'jsonKey' => 'deny_access',
+            'params'  => [
+                'id' => $this->params->shareIdPath(),
+                'access_id' => $this->params->shareId(),
+            ],
+            'headers' => [
+                'Vary' => 'X-OpenStack-Manila-API-Version',
+                'X-Openstack-Manila-Api-Version' => '2.42',
+            ],
+        ];
+    }
 }

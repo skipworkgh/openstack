@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OpenStack\Shared\v2\Models;
 
+use RuntimeException;
+use OpenStack\Common\Resource\Deletable;
 use OpenStack\Common\Resource\HasWaiterTrait;
 use OpenStack\Common\Resource\OperatorResource;
 
@@ -12,7 +14,7 @@ use OpenStack\Common\Resource\OperatorResource;
  *
  * @package OpenStack\Shared\v2\Models
  */
-class AccessRule extends OperatorResource
+class AccessRule extends OperatorResource implements Deletable
 {
     use HasWaiterTrait;
 
@@ -45,6 +47,19 @@ class AccessRule extends OperatorResource
     protected $aliases = [
         'state' => 'status',
     ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete()
+    {
+        // For some odd reason, the share_id is not passed along when fetching all access rules for a single share.
+        // We need to make sure the local share_id has been set, or the call will fail.
+        if (is_null($this->share_id)) {
+            throw new RuntimeException('No share_id has been set for this access rule. Call the retrieve() method prior to the delete method!');
+        }
+        $this->execute($this->api->deleteShareAccessRule(), ['id' => $this->share_id, 'access_id' => $this->id]);
+    }
 
     /**
      * {@inheritdoc}

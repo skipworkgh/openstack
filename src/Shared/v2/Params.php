@@ -151,6 +151,28 @@ TYPEOTHER
     /**
      * @return array
      */
+    public function shareIdPath(): array
+    {
+        return [
+            'type' => self::STRING_TYPE,
+            'location' => self::URL,
+            'description' => 'The UUID of the share resource',
+        ];
+    }
+    /**
+     * @return array
+     */
+    public function shareId(): array
+    {
+        return [
+            'type' => self::STRING_TYPE,
+            'location' => self::JSON,
+            'description' => 'The UUID of the share resource',
+        ];
+    }
+    /**
+     * @return array
+     */
     public function projectId(): array
     {
         return [
