@@ -189,8 +189,7 @@ class Share extends OperatorResource implements Creatable, Listable, Updateable,
     public function parseMetadata(ResponseInterface $response): array
     {
         $json = Utils::jsonDecode($response);
-
-        return isset($json['metadata']) ? $json['metadata'] : [];
+        return isset($json[$this->resourceKey]) && isset($json[$this->resourceKey]['metadata']) ? $json[$this->resourceKey]['metadata'] : [];
     }
     /**
      * @param array $userOptions
