@@ -226,4 +226,24 @@ class Api extends AbstractApi
             ],
         ];
     }
+    /**
+     * @link https://docs.openstack.org/api-ref/shared-file-system/?expanded=extend-share-detail#extend-share
+     * @return array
+     */
+    public function extendShare(): array
+    {
+        return [
+            'method'  => 'POST',
+            'path'    => 'shares/{id}/action',
+            'jsonKey' => 'extend',
+            'params'  => [
+                'id' => $this->params->shareIdPath(),
+                'new_size' => $this->params->size(),
+            ],
+            'headers' => [
+                'Vary' => 'X-OpenStack-Manila-API-Version',
+                'X-Openstack-Manila-Api-Version' => '2.42',
+            ],
+        ];
+    }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OpenStack\Shared\v2\Models;
 
+use RuntimeException;
 use DateTimeImmutable;
 use OpenStack\Common\Resource\Alias;
 use OpenStack\Common\Resource\OperatorResource;
@@ -158,6 +159,25 @@ class Share extends OperatorResource implements Creatable, Listable, Updateable,
     public function delete()
     {
         $this->executeWithState($this->api->deleteShare());
+    }
+
+    /**
+     * @param int $new_size
+     */
+    public function extend(int $new_size)
+    {
+        if (is_null($this->size)) {
+            $this->retrieve();
+        }
+
+        if ($new_size < $this->size) {
+            throw new RuntimeException(sprintf('The new size of the share must be larger than the current size of the share. Current size: %sGB. Requested new size: %sGB', $this->size, $new_size));
+        }
+
+        $this->execute($this->api->extendShare(), [
+            'id' => $this->id,
+            'new_size' => $new_size,
+        ]);
     }
     /**
      * @return array
