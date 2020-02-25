@@ -147,7 +147,11 @@ class Share extends OperatorResource implements Creatable, Listable, Updateable,
 
     public function update()
     {
-        $response = $this->executeWithState($this->api->putShare());
+        $response = $this->execute($this->api->putShare(), [
+            'id' => $this->id,
+            'display_name' => $this->name,
+            'display_description' => $this->description,
+        ]);
         $this->populateFromResponse($response);
     }
 

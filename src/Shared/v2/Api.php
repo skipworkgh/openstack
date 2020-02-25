@@ -133,8 +133,8 @@ class Api extends AbstractApi
             'jsonKey' => 'share',
             'params'  => [
                 'id'          => $this->params->idPath(),
-                'name'        => $this->params->name('share'),
-                'description' => $this->params->desc(),
+                'display_name' => $this->params->name('share'),
+                'display_description' => $this->params->desc(),
             ],
         ];
     }
