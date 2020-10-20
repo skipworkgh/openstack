@@ -14,6 +14,7 @@ use OpenStack\Networking\v2\Models\Network;
 use OpenStack\Networking\v2\Models\Pool;
 use OpenStack\Networking\v2\Models\Port;
 use OpenStack\Networking\v2\Models\Quota;
+use OpenStack\Networking\v2\Models\RbacPolicy;
 use OpenStack\Networking\v2\Models\Subnet;
 
 /**
@@ -306,5 +307,35 @@ class Service extends AbstractService
     public function createLoadBalancerHealthMonitor(array $options): LoadBalancerHealthMonitor
     {
         return $this->model(LoadBalancerHealthMonitor::class)->create($options);
+    }
+
+    /**
+     * Create a new subnet resource.
+     *
+     * @param array $options {@see \OpenStack\Networking\v2\Api::postRbacPolicy}
+     */
+    public function createRbacPolicy(array $options): RbacPolicy
+    {
+        return $this->model(RbacPolicy::class)->create($options);
+    }
+
+    /**
+     * Retrieve a subnet object without calling the remote API. Any values provided in the array will populate the
+     * empty object, allowing you greater control without the expense of network transactions. To call the remote API
+     * and have the response populate the object, call {@see RbacPolicy::retrieve}.
+     */
+    public function getRbacPolicy(string $id): RbacPolicy
+    {
+        return $this->model(RbacPolicy::class, ['id' => $id]);
+    }
+
+    /**
+     * List subnets.
+     *
+     * @param array $options {@see \OpenStack\Networking\v2\Api::getRbacPolicies}
+     */
+    public function listRbacPolicies(array $options = []): \Generator
+    {
+        return $this->model(RbacPolicy::class)->enumerate($this->api->getRbacPolicies(), $options);
     }
 }

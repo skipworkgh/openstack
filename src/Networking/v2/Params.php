@@ -63,7 +63,7 @@ class Params extends AbstractParams
             'type'        => self::BOOL_TYPE,
             'location'    => self::JSON,
             'sentAs'      => 'port_security_enabled',
-            'description' => 'The port security status. A valid value is enabled (true) or disabled (false). If port security is enabled for the port, security 
+            'description' => 'The port security status. A valid value is enabled (true) or disabled (false). If port security is enabled for the port, security
                               group rules and anti-spoofing rules are applied to the traffic on the port. If disabled, no such rules are applied.',
         ];
     }
@@ -441,6 +441,11 @@ class Params extends AbstractParams
         return $this->queryFilter('name');
     }
 
+    public function queryProjectId(): array
+    {
+        return $this->queryFilter('project_id');
+    }
+
     public function queryTenantId(): array
     {
         return $this->queryFilter('tenant_id');
@@ -745,6 +750,42 @@ class Params extends AbstractParams
             'type'        => self::STRING_TYPE,
             'location'    => self::JSON,
             'description' => 'The type of health monitor. Must be one of TCP, HTTP, HTTPS',
+        ];
+    }
+
+    public function rbacPolicyTargetTenant(): array
+    {
+        return [
+            'type'        => self::STRING_TYPE,
+            'sentAs'      => 'target_tenant',
+            'description' => 'The ID of the tenant to which the RBAC policy will be enforced.',
+        ];
+    }
+
+    public function rbacPolicyObjectType(): array
+    {
+        return [
+            'type'        => self::STRING_TYPE,
+            'sentAs'      => 'object_type',
+            'description' => 'The type of the object that the RBAC policy affects. Types include qos-policy or network.',
+        ];
+    }
+
+    public function rbacPolicyObjectId(): array
+    {
+        return [
+            'type'        => self::STRING_TYPE,
+            'sentAs'      => 'object_id',
+            'description' => 'The ID of the object_type resource. An object_type of network returns a network ID and an object_type of qos-policy returns a QoS ID.',
+        ];
+    }
+
+    public function rbacPolicyAction(): array
+    {
+        return [
+            'type'        => self::STRING_TYPE,
+            'sentAs'      => 'action',
+            'description' => 'Action for the RBAC policy which is access_as_external or access_as_shared.',
         ];
     }
 }

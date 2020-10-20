@@ -701,8 +701,65 @@ class Api extends AbstractApi
             'method' => 'DELETE',
             'path'   => $this->pathPrefix.'/lbaas/healthmonitors/{id}',
             'params' => [
-            'id' => $this->params->idPath(),
+                'id' => $this->params->idPath(),
             ],
+        ];
+    }
+
+    public function getRbacPolicy(): array
+    {
+        return [
+            'method' => 'GET',
+            'path'   => $this->pathPrefix.'/rbac-policies/{id}',
+            'params' => ['id' => $this->params->urlId('rbac_policy')],
+        ];
+    }
+
+    public function getRbacPolicies(): array
+    {
+        return [
+            'method' => 'GET',
+            'path'   => $this->pathPrefix.'/rbac-policies',
+            'params' => [
+                'tenantId' => $this->params->queryTenantId(),
+                'projectId' => $this->params->queryProjectId(),
+            ],
+        ];
+    }
+
+    public function postRbacPolicy(): array
+    {
+        return [
+            'path'    => $this->pathPrefix.'/rbac-policies',
+            'method'  => 'POST',
+            'jsonKey' => 'rbac_policy',
+            'params'  => [
+                'targetTenant'    => $this->params->rbacPolicyTargetTenant(),
+                'objectType'      => $this->params->rbacPolicyObjectType(),
+                'objectId'        => $this->params->rbacPolicyObjectId(),
+                'action'          => $this->params->rbacPolicyAction(),
+            ],
+        ];
+    }
+
+    public function putRbacPolicy(): array
+    {
+        return [
+            'method' => 'PUT',
+            'path'   => $this->pathPrefix.'/rbac-policies/{id}',
+            'params' => [
+                'id'           => $this->params->urlId('rbac_policy'),
+                'targetTenant' => $this->params->rbacPolicyTargetTenant(),
+            ],
+        ];
+    }
+
+    public function deleteRbacPolicy(): array
+    {
+        return [
+            'method' => 'DELETE',
+            'path'   => $this->pathPrefix.'/rbac-policies/{id}',
+            'params' => ['id' => $this->params->urlId('rbac_policy')],
         ];
     }
 }
