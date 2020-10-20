@@ -22,6 +22,9 @@ class RbacPolicy extends OperatorResource implements Listable, Retrievable, Crea
     public $id;
 
     /** @var string */
+    public $action;
+
+    /** @var string */
     public $targetTenant;
 
     /** @var string */
