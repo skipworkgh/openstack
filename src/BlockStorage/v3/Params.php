@@ -315,4 +315,13 @@ TYPEOTHER
             'description' => 'The new size of the volume, in gibibytes (GiB).',
         ];
     }
+
+    public function cascade(): array
+    {
+        return [
+            'type'        => self::BOOL_TYPE,
+            'location'    => self::QUERY,
+            'description' => 'Remove any snapshots along with the volume. Default=False.',
+        ];
+    }
 }
