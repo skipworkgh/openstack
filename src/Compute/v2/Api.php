@@ -71,6 +71,7 @@ class Api extends AbstractApi
                 'vcpus' => $this->params->flavorVcpus(),
                 'swap'  => $this->params->flavorSwap(),
                 'disk'  => $this->params->flavorDisk(),
+                'is_public' => $this->params->flavorIsPublic(),
             ],
         ];
     }
@@ -82,6 +83,32 @@ class Api extends AbstractApi
             'path'   => 'flavors/{id}',
             'params' => [
                 'id' => $this->params->idPath(),
+            ],
+        ];
+    }
+
+    public function addFlavorAccessToTenant(): array
+    {
+        return [
+            'method' => 'POST',
+            'path' => 'flavors/{id}/action',
+            'jsonKey' => 'addTenantAccess',
+            'params' => [
+                'id' => $this->params->idPath(),
+                'tenant' => $this->params->tenant(),
+            ],
+        ];
+    }
+
+    public function removeFlavorAccessFromTenant(): array
+    {
+        return [
+            'method' => 'POST',
+            'path' => 'flavors/{id}/action',
+            'jsonKey' => 'removeTenantAccess',
+            'params' => [
+                'id' => $this->params->idPath(),
+                'tenant' => $this->params->tenant(),
             ],
         ];
     }

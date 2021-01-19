@@ -37,9 +37,17 @@ class Flavor extends OperatorResource implements Listable, Retrievable, Creatabl
 
     /** @var array */
     public $links;
+    /**
+     * @var bool
+     */
+    public $is_public;
 
     protected $resourceKey  = 'flavor';
     protected $resourcesKey = 'flavors';
+
+    protected $aliases = [
+        'os-flavor-access:is_public' => 'is_public',
+    ];
 
     /**
      * {@inheritdoc}
@@ -66,5 +74,29 @@ class Flavor extends OperatorResource implements Listable, Retrievable, Creatabl
     public function delete()
     {
         $this->execute($this->api->deleteFlavor(), ['id' => (string) $this->id]);
+    }
+
+    /**
+     * Creates an access rule to allow the usage of the current flavor in the given project uuid.
+     *
+     * @see https://docs.openstack.org/api-ref/compute/?expanded=add-flavor-access-to-tenant-addtenantaccess-action-detail#add-flavor-access-to-tenant-addtenantaccess-action
+     * @param string $project_uuid
+     */
+    public function addAccessToProject(string $project_uuid)
+    {
+        $userValues = array_merge($this->getAttrs(['id']), ['tenant' => $project_uuid]);
+        $this->execute($this->api->addFlavorAccessToTenant(), $userValues);
+    }
+
+    /**
+     * Removes access to the current flavor from the given project uuid.
+     *
+     * @see https://docs.openstack.org/api-ref/compute/?expanded=remove-flavor-access-from-tenant-removetenantaccess-action-detail#remove-flavor-access-from-tenant-removetenantaccess-action
+     * @param string $project_uuid
+     */
+    public function removeAccessFromProject(string $project_uuid)
+    {
+        $userValues = array_merge($this->getAttrs(['id']), ['tenant' => $project_uuid]);
+        $this->execute($this->api->removeFlavorAccessFromTenant(), $userValues);
     }
 }

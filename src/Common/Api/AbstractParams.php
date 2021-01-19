@@ -118,4 +118,13 @@ DESC
             'description' => '(Admin only) Lists server groups for all projects.',
         ];
     }
+
+    public function tenant(): array
+    {
+        return [
+            'type'        => self::STRING_TYPE,
+            'location'    => self::JSON,
+            'description' => 'The UUID of the tenant in a multi-tenancy cloud.',
+        ];
+    }
 }

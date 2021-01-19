@@ -541,6 +541,16 @@ EOL
         ];
     }
 
+    public function flavorIsPublic(): array
+    {
+        return [
+            'type' => self::BOOL_TYPE,
+            'sentAs' => 'os-flavor-access:is_public',
+            'location' => self::JSON,
+            'description' => 'Whether the flavor is public (available to all projects) or scoped to a set of projects. Default is True if not specified.',
+        ];
+    }
+
     public function volumeId(): array
     {
         return [
